@@ -3,10 +3,16 @@ import { useRef, useState, useEffect, useContext } from "react";
 import axios from "./api/axios";
 import useAuth from "./hooks/useAuth";
 
+import {Link, useNavigate,useLocation} from 'react-router-dom'
 const LOGIN_URL = "./auth"; ///This should match with the backend
 
 const Login = () => {
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+
   const userRef = useRef();
   const errRef = useRef();
 
@@ -14,7 +20,6 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
-  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -57,20 +62,12 @@ const Login = () => {
     console.log(user, pwd);
     setUser("");
     setPwd("");
-    setSuccess(true);
+    // setSuccess(true);
+    navigate(from, { replace: true });
   };
 
   return (
-    <>
-      {success ? (
-        <section>
-          <h1>You are logged in!</h1>
-          <br />
-          <p>
-            <a href="#">Go to Home</a>
-          </p>
-        </section>
-      ) : (
+   
         <section>
           <p
             ref={errRef}
@@ -111,8 +108,7 @@ const Login = () => {
             </span>
           </p>
         </section>
-      )}
-    </>
+    
   );
 };
 
