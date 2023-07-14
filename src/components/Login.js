@@ -1,7 +1,10 @@
 import React from "react";
 import { useRef, useState, useEffect, useContext } from "react";
-import axios from "./api/axios";
-import useAuth from "./hooks/useAuth";
+// import axios from "./api/axios";
+// import useAuth from "./hooks/useAuth";
+
+import axios from "axios";
+import useAuth from '../hooks/useAuth' 
 
 import {Link, useNavigate,useLocation} from 'react-router-dom'
 const LOGIN_URL = "./auth"; ///This should match with the backend
